@@ -114,30 +114,23 @@ for(int i = 0; i < length; i++){
         cutting_positions.push_back(i);
     }
 }
-std::vector<T> array[data_amount];
+std::vector<char> array[data_amount];
 
 for(int i = 0; i < data_amount; i++){
     if(i == 0){
         for(int j = 0; j < cutting_positions[i]; j++){
-            array[i].push_back(str[i]);
+            array[i].push_back(' ');
         }
     }
     else{
         for(int j = 0; j < cutting_positions[i] - cutting_positions[i-1] -1; j++){
-            array[i].push_back(str[i]);
+            array[i].push_back(' ');
         }     
-    }    
-}
-
-for(int i = 0; i < data_amount; i++){
-    for(int j = 0; j < cutting_positions[i]; j++){
-        for(int k = 0; k < )
-        array[i][j] = str[j];
     }
 }
 
-return 0;
 
+return 0;
 }
 
 
