@@ -101,5 +101,45 @@ class String{
     }
 };
 
+template <typename T>
+auto char_to_num(const char* str){
+
+long length = greg::String::length(str);
+int data_amount = 0;
+
+std::vector<int> cutting_positions;
+for(int i = 0; i < length; i++){
+    if(str[i] == '\n'){
+        data_amount++;
+        cutting_positions.push_back(i);
+    }
+}
+std::vector<T> array[data_amount];
+
+for(int i = 0; i < data_amount; i++){
+    if(i == 0){
+        for(int j = 0; j < cutting_positions[i]; j++){
+            array[i].push_back(str[i]);
+        }
+    }
+    else{
+        for(int j = 0; j < cutting_positions[i] - cutting_positions[i-1] -1; j++){
+            array[i].push_back(str[i]);
+        }     
+    }    
+}
+
+for(int i = 0; i < data_amount; i++){
+    for(int j = 0; j < cutting_positions[i]; j++){
+        for(int k = 0; k < )
+        array[i][j] = str[j];
+    }
+}
+
+return 0;
+
+}
+
+
 }
 #endif
