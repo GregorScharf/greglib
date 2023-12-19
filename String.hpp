@@ -1,5 +1,6 @@
 #include <iostream>
 #include "functions.hpp"
+#include <cstdint>
 
 #ifndef STRING_HPP
 #define STRING_HPP
@@ -102,7 +103,7 @@ class String{
 };
 
 template <typename T>
-auto char_to_num(const char* str){
+T char_to_num(const char* str){
 
 long length = greg::String::length(str);
 int data_amount = 0;
@@ -114,21 +115,27 @@ for(int i = 0; i < length; i++){
         cutting_positions.push_back(i);
     }
 }
-std::vector<char> array[data_amount];
 
-for(int i = 0; i < data_amount; i++){
-    if(i == 0){
-        for(int j = 0; j < cutting_positions[i]; j++){
-            array[i].push_back(' ');
-        }
+std::vector<uint8_t> nums[data_amount];
+count = 0;
+for(int i = 0; i < length-1; i++){
+    if(str[i] == '\n'){
+        count++;
     }
     else{
-        for(int j = 0; j < cutting_positions[i] - cutting_positions[i-1] -1; j++){
-            array[i].push_back(' ');
-        }     
+        nums[count].push_back(str[i]-48);
+
     }
 }
 
+
+
+
+long result[data_amount];
+for(int i = 0; i < data_amount; i++){
+    for(int j = 0; j < nums[i].size(); j++)
+        
+}
 
 return 0;
 }
