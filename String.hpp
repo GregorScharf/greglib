@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <cstdio>
 #include <stdexcept>
+#include "dynamic_array.hpp"
 
 #ifndef STRING_HPP
 #define STRING_HPP
@@ -45,6 +46,21 @@ class String{
         for(long i = 0; i <= len; i++){
             array[i] = str[i];
         }
+    }
+
+    void reassign(const char* str){
+        len = String::length(str);
+        String::copy(this);
+        delete(array);
+        array = new char[len];
+        for(long i = 0; i <= len; i++){
+            array[i] = str[i];
+        }
+        delete(backup);
+    }
+
+    void operator=(const char* str){
+        reassign(str);
     }
 
     long get_length(){
@@ -109,7 +125,7 @@ void char_to_num(const char* str, T* result){
 long length = greg::String::length(str);
 int data_amount = 0;
 
-std::vector<uint16_t> cutting_positions;
+greg::Dy_Array<uint16_t> cutting_positions;
 for(int i = 0; i < length; i++){
     if(str[i] == '\n'){
         data_amount++;
@@ -117,7 +133,7 @@ for(int i = 0; i < length; i++){
     }
 }
 
-std::vector<long> nums[data_amount];
+greg::Dy_Array<long> nums[data_amount];
 int count = 0;
 for(int i = 0; i < length-1; i++){
     if(str[i] == '\n'){
