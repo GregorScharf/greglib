@@ -103,12 +103,12 @@ class String{
 };
 
 template <typename T>
-T char_to_num(const char* str){
+void char_to_num(const char* str, T* result){
 
 long length = greg::String::length(str);
 int data_amount = 0;
 
-std::vector<int> cutting_positions;
+std::vector<uint16_t> cutting_positions;
 for(int i = 0; i < length; i++){
     if(str[i] == '\n'){
         data_amount++;
@@ -116,8 +116,8 @@ for(int i = 0; i < length; i++){
     }
 }
 
-std::vector<uint8_t> nums[data_amount];
-count = 0;
+std::vector<long> nums[data_amount];
+int count = 0;
 for(int i = 0; i < length-1; i++){
     if(str[i] == '\n'){
         count++;
@@ -128,18 +128,24 @@ for(int i = 0; i < length-1; i++){
     }
 }
 
-
-
-
-long result[data_amount];
 for(int i = 0; i < data_amount; i++){
-    for(int j = 0; j < nums[i].size(); j++)
-        
+    for(int j = 0; j < nums[i].size() ; j++){
+        for(int k = nums[i].size()-1; k > j; k--){
+            nums[i][j] *= 10;
+        }
+    }
 }
 
-return 0;
+for(int i = 0; i < data_amount; i++){
+    result[i] = 0;
+}
+for(int i = 0; i < data_amount; i++){
+    for(int j = 0; j < nums[i].size(); j++){
+        result[i] += nums[i][j];
+    }
 }
 
+}
 
 }
 #endif
