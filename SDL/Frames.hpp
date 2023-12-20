@@ -1,5 +1,4 @@
 #include <SDL2/SDL.h>
-#include <iostream>
 
 #ifndef FRAMES_HPP
 #define FRAMES_HPP

@@ -1,6 +1,7 @@
-#include <iostream>
 #include "functions.hpp"
 #include <cstdint>
+#include <cstdio>
+#include <stdexcept>
 
 #ifndef STRING_HPP
 #define STRING_HPP
