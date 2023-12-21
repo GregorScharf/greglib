@@ -1,0 +1,76 @@
+GregLib's String class is a wrapper arround a standard char*, 
+it is not interoperable with the the std::string from the c++ standard library.
+
+Privat Members:
+
+fields:
+
+char *backup:
+    a char* wich is used to store the contents of the String temporarily for things like reallocation and slicing.
+
+char *array:
+    ironically a char* that is used to store the contents of the String. 
+    array always exists outside the scope of the String classes function.
+    was originally public but was made private due to the addition of new functions.
+
+long len:
+    interger that keeps track of the length of the contents of array.
+    since a char is 1 byte it also kinda corresponds to the memory size of the String.
+    may not work right now. (21.12.23)
+
+functions:
+
+static void copy(String* str):
+    static method that takes a String* called self as an argument.
+    copies the array of the argument into its backup.
+    backup needs to be freed manually after use.
+
+
+Public Members:
+
+functions:
+
+static long length(const char* str):
+    static method that takes a const char* str as an argument and returns the length of it.
+
+long get_length():
+    returns the len variable of the String.
+
+void reassign(const char* str):
+    takes a const char* str as argument and changes array to the contens of str.
+
+void change_char(int index, char c):
+    takes an index and char c as arguments changes the character at the index to the given char c.
+
+void print():
+    loops trough the elements of array and writes them to the stdout with putchar().
+
+const char* get_array():
+    returns array as a const, so it (hopefully) won't be changed.
+
+void append(const char* added_str):
+    creates a backup trough copy(), reallocates array to the initial size + the size of added_str, 
+    copies the backup into array and then the added_str at the rest of it.
+
+int slice(int start, int end):
+    removes all the elements of array that are bigger or equal to start and smaller than end.
+
+operators:
+
+GregLib's String class supports the following operators:
+
+    = assignment/reassignment operator: 
+    3 overloads with different arguments, const char* str, const String* str, const String str.
+    In all cases it takes either the char* directly or trough the string that is passed in 
+    and passes it to the reassign function, which then changes the contents the array.
+
+    += appending operator:
+    4 overloads with arguments of either, const char* str, const String* str, const String str, const char c.
+    In all cases it extracts the char* from the arguments and passes them to the append function,
+    which reallocates the String with extra memory from the argument and copies the backup + the added str into array.
+
+    [] index operator:
+    1 overload with an interger argument called index.
+    returns the char at the corresponding index of the array, 
+    does not support assignment !!(str[2] = 'f').
+

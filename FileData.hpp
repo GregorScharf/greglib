@@ -25,7 +25,7 @@ class FileData{
 
     template<typename T>
     int Write(T *data){
-        file.open(name.array);
+        file.open(name.get_array());
         for (int i = 0; i < data_amount; i++){
             file << data[i] << "\n";
         }
@@ -35,27 +35,26 @@ class FileData{
 
     
     greg::String Read(){
-        FILE *file = fopen(name.array, "rb");
+        FILE *file = fopen(name.get_array(), "rb");
         if(file == nullptr){
             perror("Error opening file:");
-            printf("%s \n", name.array);
+            printf("%s \n", name.get_array());
         }
 
         fseek(file, 0, SEEK_END);
         long file_size = ftell(file);
         rewind(file);
-        content.array = new char[file_size +1];
 
-        size_t read_size = fread(content.array, 1, file_size, file);
+        char *buffer = new char[file_size+1];
+        size_t read_size = fread(buffer, 1, file_size, file);
+        buffer[file_size] = '\0';
 
         if(read_size != file_size){
             perror("Error reading file");
             fclose(file);
-            delete(content.array);
         }
+        content.reassign(buffer);
 
-        content.array[file_size] = '\0';
-        content.set_length(greg::String::length(content.array)-1);
         fclose(file);
         return content;
 

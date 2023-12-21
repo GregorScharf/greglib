@@ -10,8 +10,8 @@ namespace greg{
 template <typename T>
 class Dy_Array{
     private:
-    int size; // size of the entire array in bytes
-    int length; // amount of elements in the array
+    int size;
+    int length;
     T* backup;
     static void create_backup(Dy_Array* self){
         self->backup = new T[self->length];

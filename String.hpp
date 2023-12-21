@@ -1,4 +1,4 @@
-#include "functions.hpp"
+#include "range.hpp"
 #include <cstdint>
 #include <cstdio>
 #include <stdexcept>
@@ -16,6 +16,7 @@ namespace greg
 class String{
     char *backup;
     long len;
+    char *array;
 
     // creates backup for reassignment;
     static void copy(String* self){
@@ -25,7 +26,7 @@ class String{
         }
     }
     public:
-    char *array;
+    
 
     static long length(const char* str){
         long i = 0;
@@ -59,16 +60,46 @@ class String{
         delete(backup);
     }
 
+    void change_char(int index, char c){
+        if (index < 0 || index > len)
+        {
+            std::invalid_argument("Index out of range\n");
+        }
+        array[index] = c;
+    }
+
     void operator=(const char* str){
         reassign(str);
     }
+    void operator=(const String* str){
+        reassign(str->array);
+    }
+    void operator=(const String str){
+        reassign(str.array);
+    }
+    void operator+=(const char* str){
+        append(str);
+    }
+    void operator+=(const String& str){
+        append(str.array);
+    }
+    void operator+=(const String* str){
+        append(str->array);
+    }
+    void operator+=(const char c){
+        append(&c);
+    }
+
+    char operator[](int index){
+        if (index < 0 || index > len)
+        {
+            std::invalid_argument("Index out of range\n");
+        }
+        return array[index];
+        
+    }
 
     long get_length(){
-        return len;
-    }
-    // this only sets the length, IT DOES NOT REALLOC
-    long set_length(long x){
-        len = x;
         return len;
     }
 
@@ -78,8 +109,12 @@ class String{
         }
     }
 
-    void append(const char* add){
-        long added_len = String::length(add);
+    const char* get_array(){
+        return array;
+    }
+
+    void append(const char* added_str){
+        long added_len = String::length(added_str);
         String::copy(this);
         delete(array);
         array = new char[len+added_len];
@@ -87,7 +122,7 @@ class String{
             array[i] = backup[i];
         }
         for(long i = 0; i <= added_len; i++){
-            array[len+i] = add[i];
+            array[len+i] = added_str[i];
         }
         len += added_len;
         delete(backup);
@@ -110,12 +145,6 @@ class String{
         len -= range(start, end);
         return len;
 
-    }
-    
-    ~String(){
-        if(!array){
-            delete(array);
-        }
     }
 };
 
