@@ -22,6 +22,15 @@ class FileData{
         data_amount = arg_amount;
         file.close();
     }
+    FileData(){
+        data_amount = 0;
+    }
+    void init(int arg_amount,const char* file_name){
+        file.open(file_name);
+        name.append(file_name);
+        data_amount = arg_amount;
+        file.close();
+    }
 
     template<typename T>
     int Write(T *data){

@@ -1,8 +1,4 @@
-
-##                  ##
-##     GregLib      ##
-##                  ##
-
+        GregLib      
 
 An "Attempt" at writing a working standard library in C++
 
