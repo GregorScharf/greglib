@@ -4,7 +4,17 @@ An "Attempt" at writing a working standard library in C++
 
 
 This accommodates all of the bad practices i have gotten used to while learning C++.
-Documentation can be found in the Documentation directory, 
-where each .hpp file has a corresponding .doc file.
-Documentation will only be written when i want to, so it may (very likely) be out of date.
+
+The SDL Directory contains a few wrappers and prewritten code, so i don't have to rewrite it when i need it.
+
+all.hpp is a simple header to glue everything together.
+
+dynamic_array.hpp contains a class for dynamically sized arrays similar to std::vector.
+
+String.hpp is a wrapper around a dynamic array to make strings easier/safer to work with
+
+FileData.hpp allows you write data of any type into a file, and read file contents into a String
+
+char_to_num.hpp is a function that was made to work together with Filedata.hpp, to convert the String from the format in which it was read to numbers
+
 
