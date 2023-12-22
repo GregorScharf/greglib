@@ -30,16 +30,14 @@ class Dy_Array{
     }
 
     T& operator[](int index){
-        if(index < 0 || index >= length){
-            throw std::out_of_range("Index out of range");
-        }
+    if(index < 0 || index >= length){
+        throw std::out_of_range("Index out of range");}
         return array[index];
     }
 
     void set_value_at(int index, T value){
         if(index < 0 || index >= length){
-            throw std::out_of_range("Index out of range");
-        }
+            throw std::out_of_range("Index out of range");}
         array[index] = value;
     }
 
@@ -61,21 +59,19 @@ class Dy_Array{
 
     void slice(int index1, int index2){
         if(index1 < 0 || index1 >= length || index2 < 0 || index2 >= length){
-            throw std::out_of_range("Index out of range");
+        throw std::out_of_range("Index out of range");
         }
         if(index1 > index2){
             throw std::invalid_argument("Index1 must be smaller than index2");
         }
-        size -= sizeof(T) * (index2 - index1);
-        create_backup();
+        int new_length = length - (index2 - index1 + 1);
+        T* new_array = new T[new_length];
+        greg::copy(array, array + index1, new_array);
+        greg::copy(array + index2 + 1, array + length, new_array + index1);
         delete[] array;
-        array = new T[size];
-        greg::copy(backup, backup + index1, array);
-        for(int i = index1; i < length - (index2 - index1); i++){
-            array[i] = backup[i + (index2 - index1)];
-        }
-        length -= (index2 - index1);
-        delete[] backup;
+        array = new_array;
+        length = new_length;
+
     }
 
     void swap(int index1, int index2){
@@ -97,7 +93,6 @@ class Dy_Array{
         size = 0;
         length = 0;
         array = nullptr;
-        size_of_type = sizeof(T);
     }
     //
     void push_back(T value){
@@ -110,7 +105,7 @@ class Dy_Array{
     }
     array[length] = value;
     ++length;
-}
+    }
 
 };
 }

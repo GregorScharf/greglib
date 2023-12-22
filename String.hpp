@@ -51,9 +51,6 @@ class String{
     long get_length(){
         return array.get_length();
     }
-    long get_size(){
-        return array.get_size();
-    }
     void clear(){
         array.clear();
         array.push_back('\0');
