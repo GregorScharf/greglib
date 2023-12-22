@@ -33,8 +33,8 @@ for(int i = 0; i < length-1; i++){
 }
 
 for(int i = 0; i < data_amount; i++){
-    for(int j = 0; j < nums[i].size() ; j++){
-        for(int k = nums[i].size()-1; k > j; k--){
+    for(int j = 0; j < nums[i].get_length() ; j++){
+        for(int k = nums[i].get_length()-1; k > j; k--){
             nums[i][j] *= 10;
         }
     }
@@ -44,7 +44,7 @@ for(int i = 0; i < data_amount; i++){
     result[i] = 0;
 }
 for(int i = 0; i < data_amount; i++){
-    for(int j = 0; j < nums[i].size(); j++){
+    for(int j = 0; j < nums[i].get_length(); j++){
         result[i] += nums[i][j];
     }
 }

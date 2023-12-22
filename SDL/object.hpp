@@ -8,11 +8,21 @@
 namespace greg{
 namespace SDL2{
 
+typedef struct{
+    float x;
+    float y;
+}Vec2;
+
+
 class Rect{
     public:
     SDL_Rect self;
     void operator=(const SDL_Rect* rect){
         self = *rect;
+    }
+    void operator+=(Vec2 vec){
+        self.x += vec.x;
+        self.y += vec.y;
     }
 };
 
@@ -29,13 +39,11 @@ class Object{
         src_rect = src;
         surface = SDL_LoadBMP(image_path);
     }
-    void shift_dst(int x, int y){
-        dst_rect.self.x += x;
-        dst_rect.self.y += y;
+    void shift_dst(Vec2 vec){
+        dst_rect+=vec;
     }
-    void shift_src(int x, int y){
-        src_rect.self.x += x;
-        src_rect.self.y += y;
+    void shift_src(Vec2 vec){
+        src_rect += vec;
     }
     
     void set_dst(SDL_Rect *rect){

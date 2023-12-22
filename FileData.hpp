@@ -25,16 +25,10 @@ class FileData{
     FileData(){
         data_amount = 0;
     }
-    void init(int arg_amount,const char* file_name){
-        file.open(file_name);
-        name.append(file_name);
-        data_amount = arg_amount;
-        file.close();
-    }
 
     template<typename T>
     int Write(T *data){
-        file.open(name.get_array());
+        file.open(name.get_array(), std::ios::out);
         for (int i = 0; i < data_amount; i++){
             file << data[i] << "\n";
         }

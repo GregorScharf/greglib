@@ -9,5 +9,6 @@
 
 #include "SDL/Frames.hpp"
 #include "SDL/Game.hpp"
+#include "SDL/object.hpp"
 
 #endif
