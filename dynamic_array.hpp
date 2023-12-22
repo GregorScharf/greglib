@@ -1,3 +1,5 @@
+#include <stdexcept>
+
 #ifndef DYNAMIC_ARRAY_HPP
 #define DYNAMIC_ARRAY_HPP
 
@@ -17,7 +19,7 @@ class Dy_Array{
         self->backup = new T[self->length];
         for(int i = 0; i < self->length; i++){
             self->backup[i] = self->array[i];
-        }
+        } 
     }
     public:
     T* array;
@@ -87,6 +89,12 @@ class Dy_Array{
         T temp = array[index1];
         array[index1] = array[index2];
         array[index2] = temp;
+    }
+    void clear(){
+        size = 0;
+        length = 0;
+        delete[] array;
+        array = nullptr;
     }
 
     Dy_Array(){

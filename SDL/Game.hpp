@@ -32,7 +32,7 @@ class Game{
         data.data_amount = data_amount;
         data_array = new int[data_amount];
         greg::String content = data.Read();
-        greg::char_to_num<int>(content.get_array(), data_array);
+        greg::char_to_num<int>(content.get_ptr(), data_array);
         Frames.init(data_array[0]);
         running = true;
         if(window == NULL || renderer == NULL){

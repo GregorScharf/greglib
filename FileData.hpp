@@ -28,7 +28,7 @@ class FileData{
 
     template<typename T>
     int Write(T *data){
-        file.open(file_name.get_array(), std::ios::out);
+        file.open(file_name.get_ptr(), std::ios::out);
         for (int i = 0; i < data_amount; i++){
             file << data[i] << "\n";
         }
@@ -38,10 +38,10 @@ class FileData{
 
     
     greg::String Read(){
-        FILE *file = fopen(file_name.get_array(), "rb");
+        FILE *file = fopen(file_name.get_ptr(), "rb");
         if(file == nullptr){
             perror("Error opening file:");
-            printf("%s \n", file_name.get_array());
+            printf("%s \n", file_name.get_ptr());
         }
 
         fseek(file, 0, SEEK_END);

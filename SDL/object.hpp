@@ -17,7 +17,7 @@ typedef struct{
 class Rect{
     public:
     SDL_Rect self;
-    void operator=(const SDL_Rect* rect){
+    void operator=(SDL_Rect* rect){
         self = *rect;
     }
     void operator+=(Vec2 vec){
@@ -29,7 +29,7 @@ class Rect{
 // texture needs to be loaded from outside the class
 class Object{
     public:
-    
+
     Rect src_rect;
     Rect dst_rect;
     SDL_Surface* surface;
@@ -40,8 +40,6 @@ class Object{
         surface = SDL_LoadBMP(image_path);
     }
     Object(){
-        dst_rect = NULL;
-        src_rect = NULL;
         surface = NULL;
     }
     int init(SDL_Rect *dst, SDL_Rect *src, const char* image_path){
@@ -51,6 +49,7 @@ class Object{
         dst_rect = dst;
         src_rect = src;
         surface = SDL_LoadBMP(image_path);
+        return 0;
     }
     void shift_dst(Vec2 vec){
         dst_rect += vec;
