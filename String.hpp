@@ -11,11 +11,7 @@ namespace greg{
 
 class String{
     greg::Dy_Array<char> array;
-    greg::Dy_Array<char> backup;
-    void copy(){
-        backup = array;
-    }
-
+    
     public:
     static long length(const char* str){
         long i = 0;

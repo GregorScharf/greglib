@@ -1,12 +1,15 @@
 #include <stdexcept>
+#include "copy.hpp"
 
 #ifndef DYNAMIC_ARRAY_HPP
 #define DYNAMIC_ARRAY_HPP
 
 namespace greg{
 
+// warning: does not work with over 1000000000(one trillion) elements
+// may allocate more memory than needed (increases the speed of push_back())
+// push_back() is comparable to std::vector in terms of performance (in the same order of magnitude)
 
-// Warning: this is not safe, it is meant for me as an excersize to learn how to free/delete in c++
 
 // Dy_Array is a dynamic array that can be used to store any type of data which has compile time known size
 template <typename T>
@@ -15,20 +18,15 @@ class Dy_Array{
     int size;
     int length;
     T* backup;
-    static void create_backup(Dy_Array* self){
-        self->backup = new T[self->length];
-        for(int i = 0; i < self->length; i++){
-            self->backup[i] = self->array[i];
-        } 
+    void create_backup(){
+        backup = new T[length];
+        greg::copy(array, array + length, backup);
     }
     public:
     T* array;
     
     int get_length(){
         return length;
-    }
-    int get_size(){
-        return size;
     }
 
     T& operator[](int index){
@@ -50,11 +48,10 @@ class Dy_Array{
             throw std::out_of_range("Index out of range");
         }
         size -= sizeof(T);
-        Dy_Array::create_backup(this);
+        create_backup();
+        delete[] array;
         array = new T[size];
-        for(int i = 0; i < index; i++){
-            array[i] = backup[i];
-        }
+        greg::copy(backup, backup + index, array);
         for(int i = index; i < length - 1; i++){
             array[i] = backup[i + 1];
         }
@@ -70,11 +67,10 @@ class Dy_Array{
             throw std::invalid_argument("Index1 must be smaller than index2");
         }
         size -= sizeof(T) * (index2 - index1);
-        Dy_Array::create_backup(this);
+        create_backup();
+        delete[] array;
         array = new T[size];
-        for(int i = 0; i < index1; i++){
-            array[i] = backup[i];
-        }
+        greg::copy(backup, backup + index1, array);
         for(int i = index1; i < length - (index2 - index1); i++){
             array[i] = backup[i + (index2 - index1)];
         }
@@ -101,18 +97,20 @@ class Dy_Array{
         size = 0;
         length = 0;
         array = nullptr;
+        size_of_type = sizeof(T);
     }
+    //
     void push_back(T value){
-        size += sizeof(T);
-        Dy_Array::create_backup(this);
-        array = new T[size];
-        for(int i = 0; i < length; i++){
-            array[i] = backup[i];
-        }
-        array[length] = value;
-        length++;
-        delete[] backup;
+    if (size == length) {
+        size = (size == 0) ? 1 : size * 2;
+        T* backup = new T[size];
+        greg::copy(array, array + length, backup);
+        delete[] array;
+        array = backup;
     }
+    array[length] = value;
+    ++length;
+}
 
 };
 }
