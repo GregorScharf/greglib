@@ -12,11 +12,9 @@ void char_to_num(const char* str, T* result){
 long length = greg::String::length(str);
 int data_amount = 0;
 
-greg::Dy_Array<uint16_t> cutting_positions;
 for(int i = 0; i < length; i++){
     if(str[i] == '\n'){
         data_amount++;
-        cutting_positions.push_back(i);
     }
 }
 

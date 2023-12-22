@@ -39,8 +39,21 @@ class Object{
         src_rect = src;
         surface = SDL_LoadBMP(image_path);
     }
+    Object(){
+        dst_rect = NULL;
+        src_rect = NULL;
+        surface = NULL;
+    }
+    int init(SDL_Rect *dst, SDL_Rect *src, const char* image_path){
+        if(surface != NULL){
+            return 1;
+        }
+        dst_rect = dst;
+        src_rect = src;
+        surface = SDL_LoadBMP(image_path);
+    }
     void shift_dst(Vec2 vec){
-        dst_rect+=vec;
+        dst_rect += vec;
     }
     void shift_src(Vec2 vec){
         src_rect += vec;

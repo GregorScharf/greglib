@@ -53,7 +53,8 @@ void append(const char* added_str):
     copies the backup into array and then the added_str at the rest of it.
 
 int slice(int start, int end):
-    removes all the elements of array that are bigger or equal to start and smaller than end.
+    removes all the elements of array that are bigger or equal to start and smaller than end,
+    then shifts the remaining elements back.
 
 operators:
 
