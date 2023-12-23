@@ -15,6 +15,8 @@ String.hpp is a wrapper around a dynamic array to make strings easier/safer to w
 
 FileData.hpp allows you write data of any type into a file, and read file contents into a String
 
+copy.hpp contains a function for copying arrays into other arrays at high performance
+
 char_to_num.hpp is a function that was made to work together with Filedata.hpp, to convert the String from the format in which it was read to numbers
 
 

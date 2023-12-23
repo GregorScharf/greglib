@@ -26,7 +26,6 @@ for(int i = 0; i < length-1; i++){
     }
     else{
         nums[count].push_back(str[i]-48);
-
     }
 }
 

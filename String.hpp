@@ -1,7 +1,7 @@
 #include "dynamic_array.hpp"
 #include <stdexcept>
 #include "range.hpp"
-#include <cstdio>
+#include "out.hpp"  
 
 #ifndef STRING_REWRITE_HPP
 #define STRING_REWRITE_HPP
@@ -39,14 +39,17 @@ class String{
             array.push_back(str[i]);
         }
     }
+    void append(const char c){
+        array.push_back(c);
+    }
     void change_char(long index, char value){
         if(index < 0 || index >= array.get_length()){
             throw std::out_of_range("Index out of range");
         }
         array[index] = value;
     }
-    greg::Dy_Array<char> get_array(){
-        return array;
+    const char* get_charptr(){
+        return array.get_array();
     }
     long get_length(){
         return array.get_length();
@@ -66,7 +69,7 @@ class String{
     }
     void print(){
         for(long i = 0; i < array.get_length(); i++){
-            putchar(array[i]);
+            greg::putchar(array[i]);
         }
         putchar('\n');
     }

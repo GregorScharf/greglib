@@ -7,6 +7,8 @@
 #include "dynamic_array.hpp"
 #include "char_to_num.hpp"
 #include "copy.hpp"
+#include "type_conver.hpp"
+#include "out.hpp"
 
 
 #include "SDL/Frames.hpp"

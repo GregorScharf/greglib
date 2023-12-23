@@ -12,4 +12,4 @@ void copy(InputIt first, InputIt last, OutputIt d_first)
 }
 }
 
-#endif // COPY_HPP
+#endif
