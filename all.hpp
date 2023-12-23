@@ -6,6 +6,8 @@
 #include "FileData.hpp"
 #include "dynamic_array.hpp"
 #include "char_to_num.hpp"
+#include "copy.hpp"
+
 
 #include "SDL/Frames.hpp"
 #include "SDL/Game.hpp"

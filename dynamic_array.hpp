@@ -1,12 +1,12 @@
 #include <stdexcept>
 #include "copy.hpp"
+#include <iostream>
 
 #ifndef DYNAMIC_ARRAY_HPP
 #define DYNAMIC_ARRAY_HPP
 
 namespace greg{
 
-// warning: does not work with over 1000000000(one trillion) elements
 // may allocate more memory than needed (increases the speed of push_back())
 // push_back() is comparable to std::vector in terms of performance (in the same order of magnitude)
 
@@ -27,6 +27,9 @@ class Dy_Array{
     
     int get_length(){
         return length;
+    }
+    int get_size(){
+        return length * sizeof(T);
     }
 
     T& operator[](int index){
@@ -64,14 +67,24 @@ class Dy_Array{
         if(index1 > index2){
             throw std::invalid_argument("Index1 must be smaller than index2");
         }
-        int new_length = length - (index2 - index1 + 1);
-        T* new_array = new T[new_length];
-        greg::copy(array, array + index1, new_array);
-        greg::copy(array + index2 + 1, array + length, new_array + index1);
-        delete[] array;
-        array = new_array;
-        length = new_length;
+        int size1 = index1 * sizeof(T);
+        int size2 = (length - index2) * sizeof(T);
+        T* array1 = new T[size1];
 
+        T* array2 = new T[size2];
+        greg::copy(array, array + index1, array1);
+        for(int i = 0; i < index1; i++){
+            std::cout << array1[i] << std::endl;
+        }
+        greg::copy(array + index2, array + length, array2);
+        for(int i = 0; i < index2; i++){
+            std::cout << array2[i] << std::endl;
+        }
+        delete[] array;
+        array = new T[size1 + size2];
+        greg::copy(array1, array1 + size1, array);
+        greg::copy(array2, array2 + size2, array+index1);
+        length -= index2 - index1;
     }
 
     void swap(int index1, int index2){
@@ -106,7 +119,6 @@ class Dy_Array{
     array[length] = value;
     ++length;
     }
-
 };
 }
 
