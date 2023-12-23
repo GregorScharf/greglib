@@ -1,6 +1,5 @@
 #include <stdexcept>
 #include "copy.hpp"
-#include <iostream>
 
 #ifndef DYNAMIC_ARRAY_HPP
 #define DYNAMIC_ARRAY_HPP
@@ -73,13 +72,7 @@ class Dy_Array{
 
         T* array2 = new T[size2];
         greg::copy(array, array + index1, array1);
-        for(int i = 0; i < index1; i++){
-            std::cout << array1[i] << std::endl;
-        }
         greg::copy(array + index2, array + length, array2);
-        for(int i = 0; i < index2; i++){
-            std::cout << array2[i] << std::endl;
-        }
         delete[] array;
         array = new T[size1 + size2];
         greg::copy(array1, array1 + size1, array);
