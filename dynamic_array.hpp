@@ -6,7 +6,7 @@
 
 namespace greg{
 
-// may allocate more memory than needed (increases the speed of push_back())
+// may allocate more memory than needed
 // push_back() is comparable to std::vector in terms of performance (in the same order of magnitude)
 
 

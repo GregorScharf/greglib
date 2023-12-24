@@ -1,7 +1,7 @@
 #include "dynamic_array.hpp"
 #include <stdexcept>
-#include "range.hpp"
-#include "out.hpp"  
+#include "out.hpp"
+#include "type_conver.hpp"
 
 #ifndef STRING_REWRITE_HPP
 #define STRING_REWRITE_HPP
@@ -71,7 +71,7 @@ class String{
         for(long i = 0; i < array.get_length(); i++){
             greg::putchar(array[i]);
         }
-        putchar('\n');
+        greg::putchar('\n');
     }
 
     char operator[](long index){
