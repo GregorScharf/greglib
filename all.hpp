@@ -9,6 +9,7 @@
 #include "copy.hpp"
 #include "type_conver.hpp"
 #include "out.hpp"
+#include "execptions.hpp"
 
 
 #include "SDL/Frames.hpp"

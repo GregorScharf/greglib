@@ -1,5 +1,5 @@
-#include <stdexcept>
 #include "copy.hpp"
+#include "execptions.hpp"
 
 #ifndef DYNAMIC_ARRAY_HPP
 #define DYNAMIC_ARRAY_HPP
@@ -40,13 +40,16 @@ class Dy_Array{
 
     T& operator[](int index){
     if(index < 0 || index >= length){
-        throw std::out_of_range("Index out of range");}
+        greg::out_of_range();
+    }
         return array[index];
     }
 
     void set_value_at(int index, T value){
         if(index < 0 || index >= length){
-            throw std::out_of_range("Index out of range");}
+            greg::out_of_range();
+        }
+
         array[index] = value;
     }
     // TODO: figure faster way to do this
@@ -64,7 +67,7 @@ class Dy_Array{
 
     void remove_at(int index){
         if(index < 0 || index >= length){
-            throw std::out_of_range("Index out of range");
+            greg::out_of_range();
         }
         allocator_size -= sizeof(T);
         create_backup();
@@ -80,10 +83,10 @@ class Dy_Array{
 
     void slice(int index1, int index2){
         if(index1 < 0 || index1 >= length || index2 < 0 || index2 >= length){
-            throw std::out_of_range("Index out of range");
+            greg::out_of_range();
         }
         if(index1 > index2){
-            throw std::invalid_argument("Index1 must be smaller than index2");
+            greg::invalid_argument();
         }
         int size1 = index1 * sizeof(T);
         int size2 = (length - index2) * sizeof(T);
@@ -103,7 +106,7 @@ class Dy_Array{
 
     void swap(int index1, int index2){
         if(index1 < 0 || index1 >= length || index2 < 0 || index2 >= length){
-            throw std::out_of_range("Index out of range");
+            greg::out_of_range();
         }
         T temp = array[index1];
         array[index1] = array[index2];

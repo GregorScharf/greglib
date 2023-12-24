@@ -1,5 +1,4 @@
 #include "dynamic_array.hpp"
-#include <stdexcept>
 #include "out.hpp"
 #include "type_conver.hpp"
 
@@ -44,7 +43,7 @@ class String{
     }
     void change_char(long index, char value){
         if(index < 0 || index >= array.get_length()){
-            throw std::out_of_range("Index out of range");
+            greg::out_of_range();
         }
         array[index] = value;
     }
@@ -60,10 +59,10 @@ class String{
     }
     void slice(long index1, long index2){
         if(index1 < 0 || index1 >= array.get_length() || index2 < 0 || index2 >= array.get_length()){
-            throw std::out_of_range("Index out of range");
+            greg::out_of_range();
         }
         if(index1 > index2){
-            throw std::invalid_argument("Index1 must be smaller than index2");
+            greg::invalid_argument();
         }
         array.slice(index1, index2);
     }
@@ -76,7 +75,7 @@ class String{
 
     char operator[](long index){
         if(index < 0 || index >= array.get_length()){
-            throw std::out_of_range("Index out of range");
+            greg::out_of_range();
         }
         return array[index];
     }
