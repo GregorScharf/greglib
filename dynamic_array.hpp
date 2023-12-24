@@ -121,6 +121,8 @@ class Dy_Array{
         length = 0;
         array = nullptr;
     }
+    
+    // this was the most shizophrenic i've ever been while coding
     void push_back(T value){
     if(allocator_size == length) {
         allocator_size = (allocator_size == 0) ? 1 : allocator_size * 2;

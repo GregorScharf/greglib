@@ -32,20 +32,17 @@ greg::Dy_Array<int> long_to_digits(long value) {
 
     return result;
 }
-
-const char* to_charptr(long value){
+char* long_to_char(long value){
     greg::Dy_Array<int> digits;
     digits = long_to_digits(value);
-    greg::Dy_Array<char> chars;
+    char* result;
+    result = new char[digits.get_length()+2];
     for(int i = 0; i < digits.get_length(); i++){
-        chars.push_back(digits[i] + 48);
+        result[i] = (digits[i] + 48);
     }
-    return chars.get_array();
-
-    
+    result[digits.get_length()] = '\0';
+    return result;
 }
-
-
 }
 
 
