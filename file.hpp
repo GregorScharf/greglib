@@ -24,6 +24,11 @@ class File{
         fd = -1;
         _open = false;
     }
+    // only call once and only if you used the default constructor
+    void set_path(const char* _path){
+        path = _path;
+
+    }
     void open(const char* _path, int mode){
         fd = syscall(SYS_open, _path, O_RDWR | O_CREAT, mode);
         if(fd == -1){

@@ -107,7 +107,7 @@ class String{
         }
     }
     void operator+=(const char c){
-        append(&c);
+        array[array.get_length()-1] = c;
     }
 };
 

@@ -29,6 +29,7 @@ class Game{
     }
 
     void init(const char* filename, int _data_amount){
+        data.set_path(filename);
         data_array = new int[data_amount];
         const char* content_buffer = data.read();
         data_amount = _data_amount;
@@ -49,7 +50,7 @@ class Game{
         greg::String content;
         for(int i = 0; i < data_amount; i++){
             content += greg::long_to_char(data_array[i]);
-            content += "\n";
+            content += '\n';
         }
         data.write(content.get_ptr());
         SDL_Quit();

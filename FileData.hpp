@@ -9,7 +9,7 @@
 
 namespace greg{
 
-// deprecated class, use File class and typeconversion functions instead instead
+// deprecated class, use File class and typeconversion functions instead
 
 class FileData{
     public:
@@ -39,28 +39,8 @@ class FileData{
 
     
     greg::String Read(){
-        FILE *file = fopen(file_name.get_ptr(), "rb");
-        if(file == nullptr){
-            perror("Error opening file:");
-            printf("%s \n", file_name.get_ptr());
-        }
-
-        fseek(file, 0, SEEK_END);
-        long file_size = ftell(file);
-        rewind(file);
-
-        char *buffer = new char[file_size+1];
-        size_t read_size = fread(buffer, 1, file_size, file);
-        buffer[file_size] = '\0';
-
-        if(read_size != file_size){
-            perror("Error reading file");
-            fclose(file);
-        }
-        content.reassign(buffer);
-
-        fclose(file);
-        return content;
+        return file.read();
+        
 
     }
 
