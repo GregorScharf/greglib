@@ -14,7 +14,7 @@ dynamic_array.hpp contains a class for dynamically sized arrays similar to std::
 
 String.hpp is a wrapper around a dynamic array to make strings easier/safer to work with
 
-FileData.hpp allows you write data of any type into a file, and read file contents into a String
+files.hpp allows you to write char* into files and read them from the file
 
 copy.hpp contains a function for copying arrays into other arrays at high performance
 
