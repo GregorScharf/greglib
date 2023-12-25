@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
-#include <fstream>
 #include "String.hpp"
-#include <cstdlib>
+#include "file.hpp"
+#include "type_conver.hpp"
 
 
 #ifndef FILEDATA_HPP
@@ -16,12 +16,13 @@ namespace greg{
 class FileData{
     public:
     int data_amount;
-    std::ofstream file;
+    File file;
     greg::String file_name;
     greg::String content;
+
     FileData(int arg_amount,const char* _name){    
-        file.open(_name);
-        file_name.append(_name);
+        this->file_name = _name;
+        file.open(file_name.get_charptr(), 0777);
         data_amount = arg_amount;
         file.close();
     }
@@ -29,11 +30,10 @@ class FileData{
         data_amount = 0;
     }
 
-    template<typename T>
-    int Write(T *data){
-        file.open(file_name.get_ptr(), std::ios::out);
+    int Write(const char* str){
+        file.open(file_name.get_ptr(), 0777);
         for (int i = 0; i < data_amount; i++){
-            file << data[i] << "\n";
+            file.write(str);
         }
         file.close();
         return 0;

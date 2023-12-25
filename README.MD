@@ -2,8 +2,9 @@
 
 An "Attempt" at writing a working standard library in C++
 
-
 This accommodates all of the bad practices i have gotten used to while learning C++.
+
+Only works in Linux at the moment. Windows support may never be added.
 
 The SDL Directory contains a few wrappers and prewritten code, so i don't have to rewrite it when i need it.
 

@@ -6,8 +6,9 @@
 
 namespace greg{
 
-// may allocate more memory than needed
-// push_back() is comparable to std::vector in terms of performance (in the same order of magnitude)
+// push_back may allocate more memory than needed to avoid allocating memory every time a new element is added
+// otherwise it would be too slow for more than 1mio elements
+
 
 
 // Dy_Array is a dynamic array that can be used to store any type of data which has compile time known size
