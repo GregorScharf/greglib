@@ -3,13 +3,12 @@
 #ifndef TYPE_CONVER_HPP
 #define TYPE_CONVER_HPP
 
-// warning: float to char* is not accurate as it pushes the floating point apraximation value to become bigger than it is
+// warning: float to char* is not accurate as it pushes the floating point apraximation value to become bigger than should it be
     // example: 123.456 becomes 123.4560012
     // avoid by using double_to_char() instead
 
 // for int to char*, use long_to_char() instead, works the same way
 
-// no support for negative numbers yet
 // Todo: add support for negative numbers
 
 namespace greg{
