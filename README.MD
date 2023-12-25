@@ -19,5 +19,3 @@ files.hpp allows you to write char* into files and read them from the file
 copy.hpp contains a function for copying arrays into other arrays at high performance
 
 char_to_num.hpp is a function that was made to work together with Filedata.hpp, to convert the String from the format in which it was read to numbers
-
-

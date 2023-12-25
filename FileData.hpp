@@ -9,9 +9,7 @@
 
 namespace greg{
 
-
-// todo: figure out how to make this work without the need of <fstream> and <cstdlib>
-// hopefully there is a way to do this with syscalls, else im fucked
+// deprecated class, use File class and typeconversion functions instead instead
 
 class FileData{
     public:
