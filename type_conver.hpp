@@ -147,10 +147,4 @@ char* float_to_char(float value){
 }
 
 }
-
-
-
-
-
-
 #endif

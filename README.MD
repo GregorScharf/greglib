@@ -24,6 +24,6 @@ FileData.hpp does something similar to files.hpp but is now deprecated.
 copy.hpp contains a function for copying arrays into other arrays at high speeds.
 range.hpp contains a simple range function.
 
-char_to_num.hpp is a function that was made to work together with Filedata.hpp/files.hpp, to convert the String from the format in which it was read to numbers
+char_to_num.hpp is a function that was made to work together with Filedata.hpp/files.hpp, to convert the String from the format in which it was read to numbers.
 
 type_conver.hpp has functions for number to char* conversion.
