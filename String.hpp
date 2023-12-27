@@ -1,6 +1,7 @@
 #include "dynamic_array.hpp"
 #include "out.hpp"
 #include "type_conver.hpp"
+#include "length.hpp"
 
 #ifndef STRING_REWRITE_HPP
 #define STRING_REWRITE_HPP
@@ -12,34 +13,26 @@ class String{
     greg::Dy_Array<char> array;
     
     public:
-    static long length(const char* str){
-        long i = 0;
-        while((str != NULL) && (str[i] != '\0')){
-            i++;
-        }
-        return i+1;
-    }
-    String(){;
+    String(){
+        array.push_back('\0');
     }
     String(const char* str){
-        for(long i = 0; i < String::length(str); i++){
+        for(long i = 0; i < greg::length(str); i++){
             array.push_back(str[i]);
         }
     }
     void reassign(const char* str){
         array.clear();
-        for(long i = 0; i < String::length(str); i++){
+        for(long i = 0; i < greg::length(str); i++){
             array.push_back(str[i]);
         }
     }
     
     void append(const char* str){
-        for(long i = 0; i < String::length(str); i++){
+        change_char(array.get_length()-1, str[0]);
+        for(long i = 1; i < greg::length(str); i++){
             array.push_back(str[i]);
         }
-    }
-    void append(const char c){
-        array.push_back(c);
     }
     void change_char(long index, char value){
         if(index < 0 || index >= array.get_length()){

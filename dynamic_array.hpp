@@ -51,7 +51,7 @@ class Dy_Array{
 
         array[index] = value;
     }
-    // TODO: figure faster way to do this
+    // tTODO: figure out a faster way to do his
     void insert_sort(){
         for(int i = 0; i < length; i++){
             T sort_value = array[i];

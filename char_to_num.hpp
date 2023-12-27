@@ -1,6 +1,7 @@
 #include "String.hpp"
 #include "dynamic_array.hpp"
 
+
 #ifndef CHAR_TO_NUM_HPP
 #define CHAR_TO_NUM_HPP
 
@@ -9,7 +10,7 @@ namespace greg{
 template <typename T>
 void char_to_num(const char* str, T* result){
 
-long length = greg::String::length(str);
+long length = greg::length(str);
 int data_amount = 0;
 
 for(int i = 0; i < length; i++){

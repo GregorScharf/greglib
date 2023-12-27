@@ -1,9 +1,18 @@
-#include "out.hpp"
+#include <unistd.h>
+#include <sys/syscall.h>
 
 #ifndef EXECPTIONS_HPP
 #define EXECPTIONS_HPP
 
 namespace greg{
+
+long length(const char* str){
+    long i = 0;
+    while((str != NULL) && (str[i] != '\0')){
+        i++;
+    }
+    return i+1;
+}
 
 // these are basically just print functions, but who cares
 

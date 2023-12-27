@@ -23,6 +23,7 @@ class File{
     File(){
         fd = -1;
         _open = false;
+        content_len = 0;
     }
     // only call once and only if you used the default constructor
     void set_path(const char* _path){
@@ -66,6 +67,9 @@ class File{
 
     const char* read(){
         open(path.get_ptr(), 0777);
+        struct stat st;
+        syscall(SYS_fstat, fd, &st);
+        content_len = st.st_size-1;
         char* buffer = new char[content_len];
         syscall(SYS_lseek, fd, 0, SEEK_SET);
         int read_bytes = syscall(SYS_read, fd, buffer, content_len);

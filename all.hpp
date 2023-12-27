@@ -10,6 +10,9 @@
 #include "out.hpp"
 #include "execptions.hpp"
 #include "file.hpp"
+#include "in.hpp"
+#include "FileData.hpp"
+#include "length.hpp"
 
 
 #include "SDL/Frames.hpp"

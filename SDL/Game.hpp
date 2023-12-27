@@ -26,6 +26,10 @@ class Game{
         screen_rect.self.y = y;
         screen_rect.self.w = width;
         screen_rect.self.h = heigth;
+        if(SDL_Init(SDL_INIT_EVERYTHING) < 0){
+            running = false;
+            greg::costum_error("SDL could not initialize! SDL_Error: \n");
+        }
     }
 
     void init(const char* filename, int _data_amount){
@@ -43,6 +47,7 @@ class Game{
             window = SDL_CreateWindow("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
             renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
         }
+        loop();
     }
     void quit(){
         SDL_DestroyRenderer(renderer);
@@ -50,11 +55,30 @@ class Game{
         greg::String content;
         for(int i = 0; i < data_amount; i++){
             content += greg::long_to_char(data_array[i]);
-            content += '\n';
+            content.append("\n");
         }
         data.write(content.get_ptr());
         SDL_Quit();
     }
+
+    void loop(){
+        while(running){
+            Frames.handle_start();
+            event_handler();
+            const Uint8* key_state = SDL_GetKeyboardState(NULL);
+            input_handler(key_state);
+            update();
+            render();
+            Frames.handle_end();
+        }
+        quit();
+    }
+
+    void event_handler();
+    void input_handler(const Uint8* key_state);
+    void update();
+    void render();
+
     Game(){
         window = NULL;
         renderer = NULL;
