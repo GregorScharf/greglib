@@ -15,7 +15,7 @@ class Game{
     SDL_Renderer* renderer;
     greg::File data;
     greg::SDL2::FrameHandle Frames;
-    int *data_array;
+    greg::Dy_Array<int> data_array;
     bool running;
     int data_amount;
     Game(const char* window_name, const int x, const int y, const int width, const int heigth, SDL_WindowFlags Flags){
@@ -34,10 +34,9 @@ class Game{
 
     void init(const char* filename, int _data_amount){
         data.set_path(filename);
-        data_array = new int[data_amount];
         const char* content_buffer = data.read();
         data_amount = _data_amount;
-        greg::char_to_num(content_buffer, data_array);
+        data_array = greg::char_to_num<int>(content_buffer);
         delete[] content_buffer;
         
         

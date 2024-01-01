@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include <sys/syscall.h>
-#include "type_conver.hpp"
+#include "type_conver.hpp"  
 
 
 #ifndef OUT_HPP
@@ -25,6 +25,13 @@ int print(int num){
 
 int print(double num){
     char* str = double_to_char(num);
+    syscall(SYS_write, STDOUT_FILENO, str, length(str));
+    newline();
+    return length(str);
+}
+
+int print(int *num){
+    char* str = long_to_char(*num);
     syscall(SYS_write, STDOUT_FILENO, str, length(str));
     newline();
     return length(str);

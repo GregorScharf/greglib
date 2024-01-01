@@ -34,6 +34,7 @@ class String{
             array.push_back(str[i]);
         }
     }
+
     void change_char(long index, char value){
         if(index < 0 || index >= array.get_length()){
             greg::out_of_range();

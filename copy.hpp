@@ -3,8 +3,8 @@
 
 namespace greg{
 
-template<typename InputIt, typename OutputIt>
-void copy(InputIt first, InputIt last, OutputIt d_first)
+template<typename InputIterator, typename OutputIterator>
+void copy(InputIterator first, InputIterator last, OutputIterator d_first)
 {
     while (first != last) {
         *d_first++ = *first++;

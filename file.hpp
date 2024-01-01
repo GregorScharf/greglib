@@ -12,6 +12,15 @@
 
 namespace greg{
 
+bool file_exists(const char* path) {
+    struct stat buffer;
+    if (syscall(SYS_stat, path, &buffer) == 0) {
+        return S_ISREG(buffer.st_mode);
+    } else {
+        return false;
+    }
+}
+
 class File{
     private:
     bool _open;
@@ -19,7 +28,6 @@ class File{
     long content_len;
     greg::String path;
     public:
-
     File(){
         fd = -1;
         _open = false;
@@ -31,6 +39,12 @@ class File{
 
     }
     void open(const char* _path, int mode){
+        if(_open){
+            greg::costum_error("File is already open \n");
+        }
+        if(!file_exists(_path)){
+            greg::print("File does not exist \nCreating file...");
+        }
         fd = syscall(SYS_open, _path, O_RDWR | O_CREAT, mode);
         if(fd == -1){
             greg::costum_error("File could not be opened \n");
@@ -54,7 +68,7 @@ class File{
     }
     
     int write(const char* str){
-        open(path.get_ptr(), 0777);
+        syscall(SYS_open, path.get_ptr(), O_RDWR | O_CREAT | O_TRUNC, 0777); 
         content_len = greg::length(str);
         syscall(SYS_write, fd, str, content_len);
         if(fd == -1){
@@ -62,7 +76,6 @@ class File{
         }
         close();
         return 0;
-
     }
 
     const char* read(){
